@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Login</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="container">
+      <section class="side login-side">
+        <img
+          alt="Ilustração de dois gatos, um rosa e um azul, lendo um mangá roxo"
+          class="side-image"
+          src="2.png"
+          href="telainicial.html"
+        />
+        <p class="side-text login-text">Acesse sua conta</p>
+        <button id="darkModeToggle" aria-label="Alternar modo escuro" class="dark-mode-toggle">
+        <i class="fas fa-sun"></i>
+    </button>
+      </section>
+
+      <section class="form-side login-form">
+        <form class="form" novalidate>
+          <label class="input-label">
+            <span class="icon"><i class="fas fa-user"></i></span>
+            <input
+              class="input"
+              type="text"
+              name="usuarioEmail"
+              placeholder="Nome de usuário ou Email"
+              required
+            />
+          </label>
+          <label class="input-label">
+            <span class="icon"><i class="fas fa-lock"></i></span>
+            <input
+              class="input"
+              type="password"
+              name="senha"
+              placeholder="Senha"
+              required
+            />
+          </label>
+          <button class="btn submit-btn" type="submit" id="signin">
+            Login
+          </button>
+        </form>
+        <p class="small-text">
+          Ainda não tem uma conta?
+          <a href="cadastro.html">Faça seu cadastro!</a>
+        </p>
+      </section>
+    </main>
+    <script src="script.js"></script>
+    <script type="module">
+
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyDru1CvPBIhGUzThmeihHzaJpPa9cJryJw",
+    authDomain: "manga-mania-cadastros.firebaseapp.com",
+    projectId: "manga-mania-cadastros",
+    storageBucket: "manga-mania-cadastros.firebasestorage.app",
+    messagingSenderId: "748683140394",
+    appId: "1:748683140394:web:0efbcd77778a936a0ed253",
+    measurementId: "G-1051PVJELQ"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+  const form = document.querySelector('.form');
+  const emailInput = document.querySelector('input[name="usuarioEmail"]');
+  const senhaInput = document.querySelector('input[name="senha"]');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const email = emailInput.value;
+    const senha = senhaInput.value;
+
+    signInWithEmailAndPassword(auth, email, senha)
+      .then((userCredential) => {
+        alert("Login realizado com sucesso!");
+        window.location.href = "dashboard.html"; // ou página principal após login
+      })
+      .catch((error) => {
+        alert("Erro ao fazer login: " + error.message);
+      });
+  });
+</script>
+  </body>
+</html>
